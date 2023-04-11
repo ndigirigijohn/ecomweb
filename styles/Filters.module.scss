@@ -1,0 +1,29 @@
+.filters{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2rem auto;
+    padding: 0;
+    align-items: center;
+}
+
+.btn{
+    
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    justify-content: center;
+    align-items:center;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06)), #0F2330;
+
+}

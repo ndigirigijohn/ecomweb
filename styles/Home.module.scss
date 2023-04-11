@@ -1,0 +1,29 @@
+.home{
+
+    background-color: #0F2330;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 150vh;
+  
+    
+}
+
+.products {
+    width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 items for laptop */
+  }
+  
+  @media (max-width: 768px) {
+    .products {
+      grid-template-columns: repeat(2, 1fr); /* 2 items when screen is minimized */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .products {
+      grid-template-columns: repeat(1, 1fr); /* 1 item for mobile */
+    }
+  }
+  
