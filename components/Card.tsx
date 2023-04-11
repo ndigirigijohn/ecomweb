@@ -40,7 +40,7 @@ function Card({ id, image, title, price, category }: Props) {
       <div
         className={styles.info}
       >
-        <p>{price}</p>
+        <p>$ {price}</p>
         <p>{category}</p>
       </div>
     </div>

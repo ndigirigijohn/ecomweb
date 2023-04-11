@@ -34,7 +34,7 @@ setProduct(res.data);
 return (
     <div className={styles.container}>
     <Navbar />
-    <button onClick={()=>router.back()}>
+    <button className={styles.backButton } onClick={()=>router.back()}>
       Back
     </button>
 
