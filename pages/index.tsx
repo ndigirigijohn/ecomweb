@@ -46,11 +46,12 @@ export default function Home() {
       <Search 
       setProducts={setProducts}
       products={allProducts}
-
       />
-      <Filters />
+      <Filters 
+      setProducts={setProducts}
+      />
       <div className={styles.products}>
-    {
+      {
       products.map((product:Product) => (
         <Card
         key={product.id}
