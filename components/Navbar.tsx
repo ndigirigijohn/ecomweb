@@ -1,16 +1,25 @@
 import React from 'react'
 import styles from '../styles/Navbar.module.scss'
-import { RxExit} from "react-icons/rx";
+import { BiExit } from 'react-icons/bi';
 
 
 function Navbar() {
   return (
     <div className={styles.navbar}>
       <h1 className={styles.logo}>
-        NO
-        <span className={styles.logo_text}>STRESS</span>
+          <span >
+          NO
+          </span>
+        <span className={styles.logo_text1}>
+          STRESS
+        </span>
       </h1>
-      <RxExit />
+      <BiExit
+      size={24}
+      color={'#FFCD29'}
+      className={styles.exit}
+       />
+ 
     </div>
   );
 }
