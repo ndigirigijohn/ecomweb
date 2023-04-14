@@ -1,43 +1,42 @@
 import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import styles from "../styles/Search.module.scss";
-import { ImCancelCircle } from "react-icons/im";
-import axios from "axios";
+import { FaTimes } from "react-icons/fa";
 
 interface SearchProps {
   setProducts: React.Dispatch<React.SetStateAction<any>>;
+  products: any;
 }
 
-const Search: React.FC<SearchProps> = ({ setProducts }) => {
+const Search: React.FC<SearchProps> = ({ setProducts, products }) => {
   const [search, setSearch] = useState<string>("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchValue = e.target.value;
-    setSearch(searchValue);
-    console.log("searching for: ", searchValue)
-
-    axios
-      .get(`https://fakestoreapi.com/products?title=${searchValue}`)
-      .then((res) => {
-        setProducts(res.data);
-      });
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    setProducts(products.filter((product: any) => {
+      return product.title.toLowerCase().includes(e.target.value.toLowerCase());
+    }
+    ));  
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.content}>
       <div className={styles.search}>
-        <button>
-          <AiOutlineSearch className={styles.search_icon} />
-        </button>
+          <AiOutlineSearch 
+          fontSize={20}
+          color="#FFCD29"
+          className={styles.search_icon} />
         <input
           value={search}
-          onChange={handleChange}
+          onChange={handleSearch}
           type="text"
           className={styles.search_bar}
         />
-        <button>
-          <ImCancelCircle />
-        </button>
+          <FaTimes
+          fontSize={20}
+          color="#0F2330"
+          className={styles.clear_icon}
+          />
       </div>
     </div>
   );

@@ -15,22 +15,23 @@ export default function Home() {
     price: number;
     category: string;
     }
-    
-    
-
-  const [search, setSearch] = useState('');
+ 
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [products, setProducts] = useState([]);
 
   const getProducts = async () => {
     const res = await fetch(`https://fakestoreapi.com/products`);
     const data = await res.json();
     setProducts(data);
+    setAllProducts(data);
   }
   useEffect(() => {
     getProducts()
   }, []);
 
   console.log(products);
+      
+ 
   return (
     
     <div className={styles.home}>
@@ -41,10 +42,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      
- 
       <Navbar />
-      <Search setProducts={setProducts}/>
+      <Search 
+      setProducts={setProducts}
+      products={allProducts}
+
+      />
       <Filters />
       <div className={styles.products}>
     {
@@ -59,8 +62,6 @@ export default function Home() {
         />
       ))
     }
-       
-
       </div>
       <div>
     <style jsx global>{`
