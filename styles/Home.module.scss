@@ -5,14 +5,16 @@
     flex-direction: column;
     align-items: center;
     min-height: 150vh;
+    width: 100%;
   
     
 }
 
 .products {
-    width: 80vw;
+    width: 70vw;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 items for laptop */
+    grid-template-columns: repeat(4, 1fr); /* 3 items for laptop */
+    grid-gap: 0.5rem 0.5rem;
   }
   
   @media (max-width: 768px) {
@@ -23,7 +25,10 @@
   
   @media (max-width: 480px) {
     .products {
-      grid-template-columns: repeat(1, 1fr); /* 1 item for mobile */
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
   
