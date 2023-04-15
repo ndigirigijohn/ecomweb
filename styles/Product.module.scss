@@ -1,101 +1,91 @@
-.container{
-    width: 100%;
-    background-color: #0F2330;
+.product{
+    width: 100vw;
      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), #0F2330;
+
+  
+     .item{
+      margin-top: 10px;
+      border-radius: 8px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 80vh;
+      width: 80%;
+      background: linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));
+
+
+      .mobileTitle{
+        display: none;
+      }
+      .images{
+        margin-top: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        .mainImage{
+          width: 80%;
+          height: 70%;
+          display: flex;
+          justify-content: center;
+          background-color: white;
+          border-radius: 10px;
+          .mainimg{
+            margin-top: 10px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            object-fit: contain;
+          }
+
+        }
+        .smallImages{
+          margin: 5px 0;
+          width: 80%;
+          height: 20%;
+          display: flex;
+          justify-content: space-between;
+
+
+          .smallImage{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+
+
+            background-color: white;
+            width:130px ;
+            height: 120px;
+            object-fit: cover;
+            
+          }
+        }
+      }
+     }
+  
 
 }
-.content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    padding: 0 50px;
-    }
-    
-    .imageWrapper {
-    width: 50%;
-    margin-right: 50px;
-    }
-    
-    .image {
-    
-    border-radius: 10px;
-    }
-    
-    .productDetails {
-    width: 50%;
-    }
-    
-    .title {
-    font-size: 28px;
-    margin-bottom: 10px;
-    color: #ADF5D6;
-    }
-    
-    .category {
-    font-size: 18px;
-    margin-bottom: 20px;
-    }
-    
-    .description {
-    font-size: 16px;
-    margin-bottom: 20px;
-    }
-    
-    .rating {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    
-    span:first-child {
-    font-size: 24px;
-    font-weight: 700;
-    margin-right: 10px;
-    }
-    }
-    
-    .price {
-    font-size: 24px;
-    margin-bottom: 20px;
-    }
-    
-    .buyButton {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #0070f3;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    
-    &:hover {
-    background-color: #0058b7;
-    }
-    }
-    .backButton {
-        background-color: #f8f8f8;
-        color: #333;
-        border: none;
-        border-radius: 4px;
-        padding: 10px 20px;
-        margin-top: 20px;
-        margin-left: 20px;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-      }
-      
-      .backButton:hover {
-        background-color: #333;
-        color: #f8f8f8;
-      }
 
-    //modile
-    @media (max-width: 768px) {
-    .content {
-    flex-direction: column;
-    padding: 0 20px;
+//media query
+@media screen and (max-width: 768px) {
+  .product {
+    .item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      .mobileTitle{
+        display: block;
+     
+      }
+     
     }
+  }
 }
-      

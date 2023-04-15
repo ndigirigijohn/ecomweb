@@ -2,72 +2,131 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import styles from '../../styles/Product.module.scss';
-import Image from 'next/image';
 import Navbar from '@/components/Navbar';
-
-
+import Image from 'next/image';
+import StarRatings from 'react-star-ratings';
 
 interface ProductType {
-id: number;
-title: string;
-price: number;
-description: string;
-category: string;
-image: string;
-rating: {
-rate: number;
-count: number;
-};
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: any;
+  rating: {
+    rate: number;
+    count: number;
+  };
 }
 
+interface Props {
+  url: string;
+}
+
+const SmallImage: React.FC<Props> = ({ url }) => {
+  return (
+    <div className={styles.smallImage}>
+      <Image src={url} width={100} height={100} alt='' />
+    </div>
+  );
+};
+
 function Product() {
-const router = useRouter();
-const { id } = router.query;
-const [product, setProduct] =  useState<ProductType | false>();
 
-useEffect(() => {
-axios.get(`https://fakestoreapi.com/products/${id}`).then((res) => {
-setProduct(res.data);
-});
-}, [id]);
-
-return (
-    <div className={styles.container}>
-    <Navbar />
-    <button className={styles.backButton } onClick={()=>router.back()}>
-      Back
-    </button>
-
-    {
-        !product? <h1>Loading...</h1>
-        :
-
-<div className={styles.content}>
-<div className={styles.imageWrapper}>
-    <Image
-        className={styles.image}
-        width={300}
-        height={300}
-        src={product.image}
-        alt={product.title}
-    />
-
-</div>
-<div className={styles.productDetails}>
-<h1 className={styles.title}>{product.title}</h1>
-<h3 className={styles.category}>{product.category}</h3>
-<p className={styles.description}>{product.description}</p>
-<div className={styles.rating}>
-<span>{product.rating?.rate}</span>
-<span>({product.rating?.count})</span>
-</div>
-<h2 className={styles.price}>${product.price}</h2>
-<button className={styles.buyButton}>Add to Cart</button>
-</div>
-</div>
+    const router = useRouter();
+    const { id } = router.query;
+    const [product, setProduct] = useState<ProductType | undefined>();
+    const [loading, setLoading] = useState(true);
+  
+    useEffect(() => {
+      setLoading(true);
+      id &&
+      axios.get(`https://fakestoreapi.com/products/${id}`).then((res) => {
+        setProduct(res.data);
+        setLoading(false);
+      });
+    }, [id]);
+  
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+  
+    if (!product) {
+      return <div>Product unavailable</div>;
     }
 
-</div>
+  return (
+    <div className={styles.product}>
+      <Navbar />
+  
+        <div className={styles.item}>
+            <div className={styles.mobileTitle}>
+                <h1>{product.title}</h1>
+            </div>
+          <div className={styles.images}>
+            <div className={styles.mainImage}>
+                <div className={styles.mainimg}>
+                <Image  src={product.image}
+                        width={310}
+                        height={310}
+                alt='' />
+
+                </div>
+            
+            </div>
+            <div className={styles.smallImages}>
+              <SmallImage url={product.image} />
+              <SmallImage url={product.image} />
+              <SmallImage url={product.image} />
+            </div>
+          </div>
+          <div className="content">
+            <div className="title">
+              <h1>{product.title}</h1>
+            </div>
+            <div className="price">
+              <span className="value">$ {product.price}</span>
+              <span className="from">FROM NOSTRESS</span>
+            </div>
+            <div className="ratings">
+              <div className="rating">
+                <StarRatings
+                  rating={product.rating?.rate ?? 0}
+                  starRatedColor="yellow"
+                  numberOfStars={5}
+                  name='rating'
+                  starDimension="20px"
+                  starSpacing="2px"
+                />
+              </div>
+              <div className="count">
+                <span>{product.rating?.count ?? 0} Reviews</span>
+              </div>
+            </div>
+            <div className="description">
+              <p>{product.description}</p>
+            </div>
+            <div className="add_cart">
+              <div className="inputs">
+                <span>-</span>
+                <input type="text" />
+                <span>+</span>
+              </div>
+              <div className="button">
+                <button>Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>   
+   <style jsx global>{`
+      body {
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+        background-color: #0f2330;
+      }
+    `}</style>
+    </div>
 
 );
 }
