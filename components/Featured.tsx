@@ -33,8 +33,8 @@ const random = () =>{ return Math.floor(Math.random() * products.length)}
     <div className={styles.featured} >
         <h1 className={styles.main_title} >Featured products</h1>
         <div className={styles.featured_items}>
-            <Item product={products[random()]} />
-            <Item product={products[random()]} />
+            <Item similar={false} product={products[random()]} />
+            <Item similar={false} product={products[random()]} />
         </div>
 
     </div>

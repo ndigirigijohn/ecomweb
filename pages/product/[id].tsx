@@ -174,8 +174,8 @@ function Product() {
               similar.length>1&&
               <div className={styles.similar_items}>
               
-              <Item product={similar[0]} />
-              <Item product={similar[1]} />
+              <Item similar={true} product={similar[0]} />
+              <Item similar={true} product={similar[1]} />
 
                </div>
 

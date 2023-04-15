@@ -24,3 +24,18 @@
     }
   
 }
+
+//media query
+@media screen and (max-width: 768px) {
+  .featured {
+    margin-bottom: 5vh;
+
+    .featured_items{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+  }
+}

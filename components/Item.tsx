@@ -2,6 +2,8 @@ import React, { FC , useEffect, useState} from 'react';
 import Image from 'next/image';
 import StarRatings from 'react-star-ratings';
 import styles from '../styles/Item.module.scss'
+import { useRouter } from 'next/router';
+
 
 
 interface Product {
@@ -17,9 +19,27 @@ interface Product {
 
 }
 
-const Item = ({ product }: { product: Product }) => {
+const Item = ({ product, similar }: { product: Product, similar:boolean }) => {
+    const router = useRouter();
+
+    const handleClick = () => {
+        if(similar){
+            router.push({
+                pathname: `${product.id}`,
+                query: { id: product.id },
+              });
+              return
+        }
+      router.push({
+        pathname: `product/${product.id}`,
+        query: { id: product.id },
+      });
+    };
     return (
-        <div className={styles.item}>
+        <div 
+        className={styles.item}
+        onClick={handleClick}
+        >
             <div className={styles.image}>
                 <Image src={product.image} width={80} height={80} alt='' />
             </div>
