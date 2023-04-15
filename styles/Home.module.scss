@@ -6,6 +6,29 @@
     align-items: center;
     min-height: 150vh;
     width: 100%;
+    .viewAllDiv{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 2rem;
+        .viewAll{
+            color:white;
+            border: 1px solid #FFCD29;
+            border-radius: 2px;
+            padding: 0.5rem 1rem;
+            font-size: 0.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            background-color: transparent;
+            &:hover{
+                color: #0F2330;
+                background-color: #FFCD29;
+                opacity: 0.8;
+            }
+        }
+    }
   
     
 }

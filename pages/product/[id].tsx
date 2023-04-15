@@ -5,6 +5,7 @@ import styles from '../../styles/Product.module.scss';
 import Navbar from '@/components/Navbar';
 import Image from 'next/image';
 import StarRatings from 'react-star-ratings';
+import Item from '@/components/Item';
 
 interface ProductType {
   id: number;
@@ -38,6 +39,7 @@ function Product() {
     const [product, setProduct] = useState<ProductType | undefined>();
     const [loading, setLoading] = useState(true);
     const [count, setCount] = useState(1);
+    const [similar, setSimilar] = useState<ProductType[]>([]);
   
     useEffect(() => {
       setLoading(true);
@@ -46,7 +48,18 @@ function Product() {
         setProduct(res.data);
         setLoading(false);
       });
-    }, [id]);
+
+   
+    }, [id, product?.category]);
+
+
+    useEffect(() => {
+      product&&
+      axios.get(`https://fakestoreapi.com/products/category/${product.category}`).then((res) => {
+        setSimilar([res.data[Math.floor(Math.random() * res.data.length)],res.data[Math.floor(Math.random() * res.data.length)]]);   
+      });
+    }, [product]);
+
   
     if (loading) {
       return <div>Loading...</div>;
@@ -55,6 +68,7 @@ function Product() {
     if (!product) {
       return <div>Product unavailable</div>;
     }
+    console.log("similar",similar)
 
   return (
     <div className={styles.product}>
@@ -152,7 +166,23 @@ function Product() {
                 </button>
             </div>
           </div>
-        </div>   
+        </div>  
+
+        <div className={styles.similar}>
+            <h1 className={styles.main_title}>Similar Items</h1>
+            {
+              similar.length>1&&
+              <div className={styles.similar_items}>
+              
+              <Item product={similar[0]} />
+              <Item product={similar[1]} />
+
+               </div>
+
+            }
+          
+         
+        </div>
    <style jsx global>{`
       body {
         margin: 0px;
