@@ -37,6 +37,7 @@ function Product() {
     const { id } = router.query;
     const [product, setProduct] = useState<ProductType | undefined>();
     const [loading, setLoading] = useState(true);
+    const [count, setCount] = useState(1);
   
     useEffect(() => {
       setLoading(true);
@@ -80,41 +81,75 @@ function Product() {
               <SmallImage url={product.image} />
             </div>
           </div>
-          <div className="content">
-            <div className="title">
+          <div className={styles.info}>
+            <div className={styles.title}>
               <h1>{product.title}</h1>
             </div>
-            <div className="price">
-              <span className="value">$ {product.price}</span>
-              <span className="from">FROM NOSTRESS</span>
+            <div className={styles.price}>
+              <span className={styles.value}>$ {product.price}</span>
+              <span className={styles.from}>from Nostress</span>
             </div>
-            <div className="ratings">
-              <div className="rating">
+            <div className={styles.ratings}>
+              <div className={styles.rating}>
                 <StarRatings
                   rating={product.rating?.rate ?? 0}
-                  starRatedColor="yellow"
+                  starRatedColor="#FFCD29
+"
                   numberOfStars={5}
                   name='rating'
                   starDimension="20px"
                   starSpacing="2px"
                 />
               </div>
-              <div className="count">
+              <div className={styles.count}>
                 <span>{product.rating?.count ?? 0} Reviews</span>
               </div>
             </div>
-            <div className="description">
+            <div className={styles.description}>
               <p>{product.description}</p>
             </div>
-            <div className="add_cart">
-              <div className="inputs">
-                <span>-</span>
-                <input type="text" />
-                <span>+</span>
+            <div className={styles.add_cart}>
+              <div className={styles.inputs}>
+                <span className={styles.minus}
+                onClick={() => {
+                    if (count > 1) {
+                        setCount(count - 1);
+                    }
+                }
+                }
+                >-</span>
+                <input
+                onChange={
+                    (e) => {
+                        let value = parseInt(e.target.value);
+                    
+                        if(value > 0) {
+                            setCount(value);
+                            return;
+                        }
+                        setCount(1);  
+                    }
+                }
+                 className={styles.input} type="text" value={count} />
+                <span
+                onClick={() => {
+                    setCount(count + 1);
+                }}
+                 className={styles.plus}>+</span>
               </div>
-              <div className="button">
-                <button>Add to Cart</button>
-              </div>
+                <button className={styles.button}>Add to Cart</button>
+            </div>
+            <div className={styles.compare_save}>
+              <button
+                className={styles.compare}
+              >
+            COMPARE
+              </button>
+                <button
+                    className={styles.save}
+                >
+            SAVE
+                </button>
             </div>
           </div>
         </div>   
